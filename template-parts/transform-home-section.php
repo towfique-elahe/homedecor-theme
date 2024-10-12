@@ -5,7 +5,7 @@
             <div class="col branding-content">
                 <h3 class="branding-title section_heading">Transform Your Home with <?php bloginfo('name'); ?></h3>
                 <p class="branding-description">Discover the latest trends in home decor and elevate your living space with our exclusive collection. Whether you're looking for modern, classic, or eclectic styles, we have something to suit every taste. Let's turn your house into a home you'll love.</p>
-                <a href="<?php echo esc_url(home_url('/index.php/shop')); ?>" class="cta-button">Shop Now</a>
+                <a href="<?php echo esc_url(home_url('/shop')); ?>" class="cta-button">Shop Now</a>
             </div>
 
             <!-- Right Side: Image -->

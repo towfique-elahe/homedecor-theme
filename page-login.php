@@ -74,8 +74,8 @@ if (is_user_logged_in()) {
                                 <button type="submit" name="submit_login" class="btn">Login</button>
                             </div>
                             <div class="form-group">
-                                <p class="redirect">Don't have an account? <a href="<?php echo home_url('/index.php/register'); ?>">Register</a></p>
-                                <p class="redirect">Forgot your password? <a href="<?php echo home_url('/index.php/reset-password'); ?>">Reset it here</a></p>
+                                <p class="redirect">Don't have an account? <a href="<?php echo home_url('/register'); ?>">Register</a></p>
+                                <p class="redirect">Forgot your password? <a href="<?php echo home_url('/reset-password'); ?>">Reset it here</a></p>
                             </div>
                         </form>
                     </div>
@@ -89,7 +89,7 @@ if (is_user_logged_in()) {
         <div class="content">
             <h3 class="cta-heading">Welcome to Our Website</h3>
             <p class="cta-para">Join us today to enjoy exclusive benefits and more.</p>
-            <a href="<?php echo home_url('/index.php/register'); ?>" class="cta-button">Sign Up Now!</a>
+            <a href="<?php echo home_url('/register'); ?>" class="cta-button">Sign Up Now!</a>
         </div>
     </section>
 

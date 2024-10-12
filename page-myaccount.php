@@ -5,7 +5,7 @@ Template Name: My Account Page
 
 // Check if user is logged in
 if (!is_user_logged_in()) {
-    wp_redirect(home_url('/index.php/login'));
+    wp_redirect(home_url('/login'));
     exit;
 }
 
@@ -93,7 +93,7 @@ function get_current_endpoint_title() {
         <div class="content">
             <h3 class="cta-heading">Welcome to Our Website</h3>
             <p class="cta-para">Join us today to enjoy exclusive benefits and more.</p>
-            <a href="<?php echo home_url('/index.php/shop'); ?>" class="cta-button">Shop Now!</a>
+            <a href="<?php echo home_url('/shop'); ?>" class="cta-button">Shop Now!</a>
         </div>
     </section>
 

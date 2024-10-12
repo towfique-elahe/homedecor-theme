@@ -96,7 +96,7 @@ if (isset($_POST['submit_forgot_password'])) {
                                 <button type="submit" name="submit_forgot_password" class="btn">Reset Password</button>
                             </div>
                             <div class="form-group">
-                                <p class="redirect">Remembered your password? <a href="<?php echo home_url('/index.php/login'); ?>">Login</a></p>
+                                <p class="redirect">Remembered your password? <a href="<?php echo home_url('/login'); ?>">Login</a></p>
                             </div>
                         </form>
                     </div>

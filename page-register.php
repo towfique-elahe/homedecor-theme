@@ -91,7 +91,7 @@
                                 <button type="submit" name="submit" class="btn">Sign Up</button>
                             </div>
                             <div class="form-group">
-                                <p class="redirect">Already have an account? <a href="<?php echo home_url('/index.php/login'); ?>">Login</a></p>
+                                <p class="redirect">Already have an account? <a href="<?php echo home_url('/login'); ?>">Login</a></p>
                             </div>
                         </form>
                     </div>
@@ -105,7 +105,7 @@
         <div class="content">
             <h3 class="cta-heading">Welcome to Our Website</h3>
             <p class="cta-para">Join us today to enjoy exclusive benefits and more.</p>
-            <a href="<?php echo home_url('/index.php/register'); ?>" class="cta-button">Sign Up Now!</a>
+            <a href="<?php echo home_url('/register'); ?>" class="cta-button">Sign Up Now!</a>
         </div>
     </section>
 

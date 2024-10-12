@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="user">
-                                <a href="<?php echo esc_url(home_url('/index.php/my-account')); ?>" class="action_btn">
+                                <a href="<?php echo esc_url(home_url('/my-account')); ?>" class="action_btn">
                                     <ion-icon name="person-outline"></ion-icon>
                                 </a>
                             </div>

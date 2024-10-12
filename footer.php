@@ -15,7 +15,7 @@
         <p class="description">
           Discover the perfect blend of style and comfort with our curated collection of home decor items. From modern minimalism to classic elegance, we offer designs that cater to every taste. Transform your living spaces into a sanctuary of beauty and sophistication.
         </p>
-        <a href="<?php echo esc_url(home_url('/index.php/shop')); ?>" class="button">
+        <a href="<?php echo esc_url(home_url('/shop')); ?>" class="button">
           Explore Our Collection <ion-icon name="arrow-forward-outline"></ion-icon>
         </a>
       </div>
