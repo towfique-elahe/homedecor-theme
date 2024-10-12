@@ -134,7 +134,38 @@ document.addEventListener('DOMContentLoaded', function () {
         starRating.style.width = percentage + '%'; // Apply width dynamically
     }
 });
+</script>
 
+<script>
+// Select all submenu links with a data-target attribute
+const submenuLinks = document.querySelectorAll('.sub-submenu-link[data-target]');
+
+// Add event listeners to each submenu link
+submenuLinks.forEach(link => {
+  link.addEventListener('mouseenter', (event) => {
+    // Hide all dropright menus
+    document.querySelectorAll('.dropright').forEach(dropright => {
+      dropright.style.display = 'none';
+    });
+
+    // Get the target dropright menu and display it
+    const targetId = event.target.getAttribute('data-target');
+    const targetMenu = document.getElementById(targetId);
+    if (targetMenu) {
+      targetMenu.style.display = 'block';
+    }
+  });
+});
+
+// Display the first dropright menu by default
+const droprights = document.querySelectorAll('.dropright');
+droprights.forEach((dropright, index) => {
+  console.log(`Dropright ${index}:`, dropright);
+  // Optionally, you can add some condition to check which element to display
+  if (index === 0) {
+    dropright.style.display = 'block';
+  }
+});
 
 
 </script>

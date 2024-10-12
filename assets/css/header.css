@@ -10,19 +10,19 @@
   background-color: var(--clr2);
 }
 .header .topbar .container {
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 1rem;
 }
 .header .greeting {
   color: var(--clr4);
   font-size: 0.8rem;
-  font-weight: 400;
+  font-weight: 500;
   text-align: center;
-  letter-spacing: 0.1rem;
+  letter-spacing: 1px;
 }
 
 /* mainbar */
 .header .mainbar .container {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   align-items: center;
 }
 .header .logo_container {
@@ -33,12 +33,14 @@
 }
 .header .search_grp {
   flex: 3;
-  display: flex;
+  flex-direction: row;
   position: relative;
   border: var(--border1);
   border-radius: var(--borderRadius1);
+  gap: 0;
+  overflow: hidden;
 }
-.header .cat_menu {
+/* .header .cat_menu {
   position: relative;
 }
 .header .cat_menu button {
@@ -74,20 +76,21 @@
 .dropdown_content li a {
   padding: 0.5rem 1rem;
   display: block;
-  transition: 0.3s ease;
+  transition: 0.2s ease;
 }
 .dropdown_content li a:hover {
   background-color: var(--clr3);
 }
 .header hr {
   border: var(--border1);
-}
+} */
 .header .search {
+  width: 100%;
   display: flex;
   align-items: center;
 }
 .header .search_box {
-  width: 25rem;
+  width: 100%;
   height: 100%;
   border: none;
   outline: none;
@@ -96,7 +99,6 @@
   background-color: none;
   font-size: 0.9rem;
   font-weight: 400;
-  letter-spacing: 0.1rem;
 }
 .header .search_btn {
   display: flex;
@@ -145,74 +147,104 @@
 }
 
 /* Navbar styling */
-.header .navbar {
+.navbar {
   border-top: var(--border1);
 }
-.header .navbar .container {
-  padding: 0 1rem;
+.navbar .container {
+  position: relative;
+  padding: 0;
+  display: flex;
+}
+.nav {
+  width: 100%;
   display: flex;
   align-items: center;
 }
-.header .nav {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.header .nav .menu {
-  list-style: none;
-  display: flex;
-  gap: 0.5rem;
-}
-.header .home_btn {
+.home-btn {
   background-color: var(--clr2);
   color: var(--clr4);
   padding: 0.5rem 2rem;
-  font-weight: 500;
-  letter-spacing: 0.1rem;
-}
-.header .nav .menu li {
-  position: relative;
-  padding: 0.5rem 1rem;
-  font-weight: 400;
-}
-.header .nav .menu li a {
-  color: var(--clr1);
-  transition: 0.3s ease;
-}
-.header .nav .menu li a:hover,
-.header .nav .menu li a:active {
-  color: var(--clr2);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
-/* Sub-menu styling */
-.header .nav .menu li ul {
+/* Navbar Links */
+.nav .menu-link {
+  background-color: transparent;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+.nav .menu-link:hover,
+.nav .menu-link:active,
+.nav .menu-link:focus {
+  background-color: var(--clr3);
+}
+
+/* Dropdown Content */
+.nav .dropdown-content,
+.nav .dropright-content {
+  width: 100%;
+  padding: 1rem;
   display: none;
   position: absolute;
-  width: 10rem;
-  top: 100%;
   left: 0;
-  z-index: 10;
   background-color: var(--clr5);
-  border: var(--border1);
-  border-radius: var(--borderRadius1);
-  list-style: none;
-  padding: 0;
+  box-shadow: var(--boxShadow1);
+  border-radius: 0 0 0.5rem 0.5rem;
+  z-index: 20;
+}
+
+/* Mega Menu Grid */
+.nav .row {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+.nav .column {
+  flex: 33.33%;
   overflow: hidden;
+  position: relative;
 }
-.header .nav .menu li ul li {
-  padding: 0 !important;
-}
-.header .nav .menu li ul li a {
+.nav .column3 {
   width: 100%;
-  white-space: nowrap;
-  padding: 0.3rem 0.5rem;
+  max-width: 25rem;
 }
-.header .nav .menu li ul li a:hover {
+.nav .submenu-heading {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.nav .sub-submenu-link {
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  transition: 0.3s ease;
+  justify-content: flex-start;
+  background-color: var(--clr4);
+  margin-bottom: 0.2rem;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.nav .sub-submenu-link:hover {
   background-color: var(--clr3);
-  color: var(--clr1) !important;
 }
-.header .nav .menu li:hover > ul {
+.nav .dropdown:hover .dropdown-content {
   display: block;
+}
+.nav .submenu-item.dropright {
+  display: none;
 }
 
 /* mobile menu */
@@ -252,7 +284,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   z-index: 1000;
-  transition: ease 0.5s;
+  transition: ease 0.2s;
 }
 .sidebar.open {
   right: 0;

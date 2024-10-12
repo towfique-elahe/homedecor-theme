@@ -32,7 +32,7 @@ html {
   --clr5: #ffffff;
   --border1: 0.1rem solid #2c302b30;
   --borderRadius1: 0.3rem;
-  --boxShadow1: 0 0 0.3rem 0 #2c302b30;
+  --boxShadow1: 0 5px 30px 0 rgba(0, 0, 0, 0.055);
 }
 
 a {
