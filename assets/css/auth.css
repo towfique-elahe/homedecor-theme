@@ -1,0 +1,198 @@
+#auth .container {
+  padding: 3rem 1rem;
+}
+#auth .main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#auth .hero-image {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#auth .image_container {
+  overflow: visible;
+  max-width: 30rem;
+}
+#auth .image_container:hover img {
+  transform: none;
+}
+#auth .card {
+  width: 100%;
+  max-width: 25rem;
+  background-color: var(--clr5);
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+#auth .section_heading {
+  text-align: center;
+}
+#auth .error_message {
+  font-size: 0.9rem;
+  color: crimson;
+}
+#auth .auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+#auth .form-group {
+  display: flex;
+  flex-direction: column;
+}
+#auth label {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+#auth input {
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 400;
+  padding: 0.3rem 0.5rem;
+  outline: none;
+  border: 1px solid var(--clr1);
+  border-radius: 0.3rem;
+}
+#auth input:hover,
+#auth input:focus {
+  border-color: var(--clr2);
+}
+#auth .password-field {
+  position: relative;
+}
+#auth .eye-toggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--clr1);
+}
+#auth .password-field input[type="password"] {
+  padding-right: 3rem;
+}
+#auth .password-field .eye-toggle.active {
+  color: var(--clr2);
+}
+#auth .captcha {
+  background-color: var(--clr4);
+  color: var(--clr2);
+  margin-top: 5px;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+  border-radius: 0.3rem;
+  font-style: italic;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+#auth .btn {
+  margin-top: 1rem;
+}
+#auth .redirect {
+  font-size: 0.9rem;
+  text-align: center;
+}
+#auth .redirect a {
+  color: var(--clr2);
+  font-weight: 500;
+}
+
+/* auth cta */
+.auth-cta {
+  width: 100%;
+  height: 30rem;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.auth-cta .cta-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(3px) brightness(0.7);
+}
+.auth-cta .content {
+  width: 100%;
+  max-width: 50rem;
+  /* background-color: #0000004a; */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.auth-cta .cta-heading {
+  color: var(--clr5);
+  font-size: 2rem;
+  font-weight: 600;
+}
+.auth-cta .cta-para {
+  color: var(--clr5);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.auth-cta .cta-button {
+  background-color: var(--clr5);
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 768px) {
+  .auth-cta .cta-heading {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  .auth-cta .cta-para {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+  .auth-cta .cta-button {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+  }
+}
+@media only screen and (max-width: 650px) {
+  #auth .row {
+    flex-direction: column;
+  }
+  #auth .image_container {
+    max-width: 15rem;
+  }
+}
+
+/* woocommerce my account page */
+.woocommerce-MyAccount-navigation {
+  margin-bottom: 2rem;
+}
+.woocommerce-MyAccount-navigation ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.woocommerce-MyAccount-navigation li a {
+  background-color: var(--clr5);
+  font-size: 0.9rem;
+  padding: 0 0.5rem;
+  border-radius: 0.2rem;
+}

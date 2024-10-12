@@ -1,0 +1,359 @@
+.header {
+  background-color: var(--clr5);
+}
+.header .container {
+  overflow: visible;
+}
+
+/* topbar */
+.header .topbar {
+  background-color: var(--clr2);
+}
+.header .topbar .container {
+  padding: 0.5rem 1rem;
+}
+.header .greeting {
+  color: var(--clr4);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 0.1rem;
+}
+
+/* mainbar */
+.header .mainbar .container {
+  padding: 0.5rem 1rem;
+  align-items: center;
+}
+.header .logo_container {
+  width: 10rem;
+}
+.header .logo {
+  width: 100%;
+}
+.header .search_grp {
+  flex: 3;
+  display: flex;
+  position: relative;
+  border: var(--border1);
+  border-radius: var(--borderRadius1);
+}
+.header .cat_menu {
+  position: relative;
+}
+.header .cat_menu button {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  text-transform: capitalize;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.header .cat_menu ion-icon {
+  font-size: 0.8rem;
+}
+.header .cat_menu .dropdown_content {
+  width: 15rem;
+  height: 20rem;
+  display: none;
+  position: absolute;
+  background-color: var(--clr5);
+  border: var(--border1);
+  border-radius: var(--borderRadius1);
+  z-index: 10000;
+  overflow-y: scroll;
+  list-style: none;
+  top: 100%;
+  left: 0;
+}
+.dropdown_content li a {
+  padding: 0.5rem 1rem;
+  display: block;
+  transition: 0.3s ease;
+}
+.dropdown_content li a:hover {
+  background-color: var(--clr3);
+}
+.header hr {
+  border: var(--border1);
+}
+.header .search {
+  display: flex;
+  align-items: center;
+}
+.header .search_box {
+  width: 25rem;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0.5rem 1rem;
+  color: var(--clr1);
+  background-color: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+}
+.header .search_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background-color: var(--clr5);
+  border: none;
+  cursor: pointer;
+}
+.header .search_btn ion-icon {
+  color: var(--clr1);
+  font-size: 1.2rem;
+}
+.header .action_grp {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.header .action_btn {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header .action_btn ion-icon {
+  font-size: 1.5rem;
+  color: var(--clr1);
+}
+.header .action_btn .counter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--clr1);
+  color: var(--clr3);
+  font-size: 0.6rem;
+  font-weight: 400;
+}
+
+/* Navbar styling */
+.header .navbar {
+  border-top: var(--border1);
+}
+.header .navbar .container {
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+.header .nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.header .nav .menu {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+}
+.header .home_btn {
+  background-color: var(--clr2);
+  color: var(--clr4);
+  padding: 0.5rem 2rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+}
+.header .nav .menu li {
+  position: relative;
+  padding: 0.5rem 1rem;
+  font-weight: 400;
+}
+.header .nav .menu li a {
+  color: var(--clr1);
+  transition: 0.3s ease;
+}
+.header .nav .menu li a:hover,
+.header .nav .menu li a:active {
+  color: var(--clr2);
+}
+
+/* Sub-menu styling */
+.header .nav .menu li ul {
+  display: none;
+  position: absolute;
+  width: 10rem;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  background-color: var(--clr5);
+  border: var(--border1);
+  border-radius: var(--borderRadius1);
+  list-style: none;
+  padding: 0;
+  overflow: hidden;
+}
+.header .nav .menu li ul li {
+  padding: 0 !important;
+}
+.header .nav .menu li ul li a {
+  width: 100%;
+  white-space: nowrap;
+  padding: 0.3rem 0.5rem;
+}
+.header .nav .menu li ul li a:hover {
+  background-color: var(--clr3);
+  color: var(--clr1) !important;
+}
+.header .nav .menu li:hover > ul {
+  display: block;
+}
+
+/* mobile menu */
+.mobile_menu {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+.mobile_menu .logo_container {
+  width: 10rem;
+}
+.mobile_menu .menu_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mobile_menu .menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+.mobile_menu .menu-icon ion-icon {
+  color: var(--clr2);
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  max-width: 20rem;
+  height: 100%;
+  background-color: var(--clr4);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  z-index: 1000;
+  transition: ease 0.5s;
+}
+.sidebar.open {
+  right: 0;
+}
+.sidebar .close-icon {
+  float: right;
+  width: 2rem;
+  height: 2rem;
+  background-color: crimson;
+  border-radius: 0.2rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar .close-icon ion-icon {
+  color: whitesmoke;
+}
+.sidebar .action-buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--clr4);
+  border-top: solid 1px var(--clr2);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sidebar .action-buttons a {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.5rem;
+  background-color: var(--clr2);
+  border-radius: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar .action-buttons ion-icon {
+  color: var(--clr5);
+}
+
+/* Navbar styling */
+.sidebar .nav {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  margin-top: 3rem;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+}
+.sidebar .nav .menu {
+  width: 100%;
+  height: 100%;
+  margin: 1rem 0 10rem 0;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+}
+.sidebar .home_btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  border-radius: 0.2rem;
+  text-align: right;
+}
+.sidebar .nav .menu li {
+  width: 100%;
+  padding: 0;
+  text-align: right;
+}
+.sidebar .nav .menu li a {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 0.5rem;
+  padding: 1rem 2rem;
+  background-color: var(--clr5);
+  border-radius: 0.2rem;
+}
+.sidebar .nav .menu li a:hover,
+.sidebar .nav .menu li a:active {
+  background-color: var(--clr2);
+  color: var(--clr5);
+}
+
+@media only screen and (max-width: 768px) {
+  .header .topbar,
+  .header .mainbar,
+  .header .navbar {
+    display: none;
+  }
+  .header .mobile_menu {
+    display: flex;
+  }
+  .header .sub-menu {
+    display: none !important;
+  }
+}

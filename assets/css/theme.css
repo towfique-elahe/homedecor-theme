@@ -1,0 +1,281 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: Poppins;
+  color: var(--clr1);
+}
+
+*::selection {
+  background-color: var(--clr2);
+  color: var(--clr4);
+}
+
+html {
+  font-size: 16px;
+  background-color: var(--clr4);
+}
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+:root {
+  --clr1: #2c302b;
+  --clr2: #658147;
+  --clr3: #e7f0dc;
+  --clr4: #f4f5f7;
+  --clr5: #ffffff;
+  --border1: 0.1rem solid #2c302b30;
+  --borderRadius1: 0.3rem;
+  --boxShadow1: 0 0 0.3rem 0 #2c302b30;
+}
+
+a {
+  display: inline-block;
+}
+
+.full-container {
+  width: 100%;
+}
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 1rem;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #fff;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.section_heading,
+.page-title {
+  font-size: 2rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+@media only screen and (max-width: 767px) {
+  .section_heading {
+    font-size: 1.5rem;
+  }
+}
+
+.section_divider {
+  width: 100%;
+  height: 3rem;
+}
+
+.line {
+  width: 100%;
+  border: solid 1px var(--clr1);
+  opacity: 0.1;
+}
+
+.btn {
+  color: var(--clr5);
+  background: var(--clr2);
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  padding: 0.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: ease 0.3s;
+  cursor: pointer;
+  border: none;
+}
+.btn ion-icon {
+  color: var(--clr5);
+  font-size: 1.5rem;
+}
+.btn:hover,
+.btn:active,
+.btn:focus {
+  background-color: var(--clr1);
+}
+
+.image_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--borderRadius1);
+  overflow: hidden;
+}
+.image_container img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  transition: 0.5s ease;
+}
+.image_container:hover img {
+  transform: scale(1.05);
+}
+
+/* carousel styles */
+.carousel-container {
+  width: 96%;
+  margin: 1rem auto;
+}
+.slick-track {
+  display: flex !important;
+  gap: 1rem;
+}
+.carousel-item {
+  padding: 1rem;
+  background: var(--clr5);
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  transition: 0.3s ease;
+  overflow: hidden;
+}
+.carousel-item .image_container {
+  max-height: 15rem;
+}
+.carousel-item:hover,
+.carousel-item:active {
+  border-color: var(--clr2);
+}
+.slick-prev:before,
+.slick-next:before {
+  color: var(--clr1) !important;
+  font-size: 1.5rem !important;
+}
+.slick-arrow:before {
+  font-size: 2rem;
+  color: var(--clr2) !important;
+  z-index: 5;
+}
+.slick-dots {
+  color: var(--clr2) !important;
+}
+.slick-dots li {
+  margin: 2px;
+}
+.slick-dots button:before {
+  font-size: 10px !important;
+}
+.slick-dots li:hover button::before {
+  color: var(--clr2) !important;
+}
+.slick-active button::before {
+  color: var(--clr2) !important;
+}
+
+/* product carousel sections */
+section .head {
+  justify-content: space-between;
+  align-items: center;
+}
+@media only screen and (max-width: 550px) {
+  section .head {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+section .link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  transition: 0.3s ease;
+}
+section ion-icon {
+  transition: 0.3s ease;
+}
+section .link:hover {
+  color: var(--clr2);
+}
+section .link:hover ion-icon {
+  color: var(--clr2);
+}
+section img:hover {
+  transform: none;
+}
+section .carousel-item {
+  position: relative;
+}
+section .carousel-item:hover img {
+  transform: scale(1.1);
+}
+section .product-link {
+  display: block;
+  width: 100%;
+}
+section .product-details {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+section .product-category {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+section .product-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  height: 2.7rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+section .prices {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+section .regular-price {
+  font-size: 0.9rem;
+  font-weight: 300;
+  opacity: 0.8;
+  text-decoration: line-through;
+}
+section .sale-price .woocommerce-Price-currencySymbol,
+section .regular-price-solo .woocommerce-Price-currencySymbol,
+section .sale-price bdi,
+section .regular-price-solo bdi {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--clr2) !important;
+}
+section .discount-percent {
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  background-color: var(--clr2);
+  color: var(--clr5);
+  padding: 0.1rem 1rem 0.1rem 0.3rem;
+  border-radius: 0.2rem 0 0 0.2rem;
+  font-size: 0.8rem;
+}
