@@ -124,6 +124,11 @@
   </div>
 </footer>
 
+<?php
+  // Include the popup template part from the template-parts directory
+  get_template_part('template-parts/popup');
+?>
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const starRating = document.querySelector('.woocommerce-product-rating .star-rating span');
@@ -166,9 +171,8 @@ droprights.forEach((dropright, index) => {
     dropright.style.display = 'block';
   }
 });
-
-
 </script>
+
 
 <!-- Enqueue Scripts -->
 <?php

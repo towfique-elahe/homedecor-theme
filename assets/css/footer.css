@@ -1,3 +1,100 @@
+/* promotional popup */
+/* Popup Container */
+#promoPopup.promo-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  overflow: auto; /* Ensure scroll if content is long */
+}
+/* Popup Content */
+#promoPopup .promo-content {
+  background-color: var(--clr5);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 90%;
+  max-width: 45rem;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+/* Popup Image */
+#promoPopup .promo-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 0.4rem;
+}
+/* Close Button */
+#promoPopup .close-btn {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.2rem;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: rgba(220, 20, 60, 0.5);
+  transition: ease 0.3s;
+}
+#promoPopup .close-btn:hover,
+#promoPopup .close-btn:active,
+#promoPopup .close-btn:focus {
+  background-color: crimson;
+}
+#promoPopup .close-btn ion-icon {
+  color: var(--clr5);
+}
+#promoPopup .promo-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--clr2);
+  margin-bottom: 1rem;
+}
+#promoPopup .promo-message strong {
+  font-weight: 600;
+}
+#promoPopup .promo-button {
+  margin-top: 1.5em;
+  padding: 0.5rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-radius: 0.2rem;
+  transition: ease 0.2s;
+  border: none;
+  cursor: pointer;
+  background-color: var(--clr3);
+  color: var(--clr2);
+}
+#promoPopup .promo-button:hover,
+#promoPopup .promo-button:active,
+#promoPopup .promo-button:focus {
+  background-color: var(--clr2);
+  color: var(--clr5);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* footer branding section */
 #footerBranding {
   background-color: var(--clr2);
