@@ -75,6 +75,7 @@ if (is_user_logged_in()) {
                             </div>
                             <div class="form-group">
                                 <p class="redirect">Don't have an account? <a href="<?php echo home_url('/index.php/register'); ?>">Register</a></p>
+                                <p class="redirect">Forgot your password? <a href="<?php echo home_url('/index.php/reset-password'); ?>">Reset it here</a></p>
                             </div>
                         </form>
                     </div>

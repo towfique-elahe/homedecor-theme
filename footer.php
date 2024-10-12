@@ -1,3 +1,30 @@
+<!-- footer branding section -->
+ <section id="footerBranding">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <!-- site name -->
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="title">
+          <?php bloginfo('name'); ?>.
+        </a>
+        <p class="sub-title">
+          Elevate Your Home's Aesthetic
+        </p>
+      </div>
+      <div class="col">
+        <p class="description">
+          Discover the perfect blend of style and comfort with our curated collection of home decor items. From modern minimalism to classic elegance, we offer designs that cater to every taste. Transform your living spaces into a sanctuary of beauty and sophistication.
+        </p>
+        <a href="<?php echo esc_url(home_url('/index.php/shop')); ?>" class="button">
+          Explore Our Collection <ion-icon name="arrow-forward-outline"></ion-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+ </section>
+
+
+
 <!-- footer -->
 <footer id="footer">
   <div class="container">
@@ -58,32 +85,29 @@
 
       <!-- newsletter column -->
       <div class="col">
-        <h4 class="heading">newsletter</h4>
-        <div id="newsletter_form">
-          <form
-            action="#"
-            method="post"
-            class="newsletter"
-            id="newsletter_form"
-          >
-            <div class="email">
-              <ion-icon name="mail-outline"></ion-icon>
-              <input
-                type="email"
-                name="newsletter_email"
-                id="newsletter_email"
-                placeholder="Your email address"
-                required
-              />
-            </div>
-            <button type="submit" class="btn">Subscribe</button>
-          </form>
-        </div>
-        <p class="para">
-          Subscribe to our Newsletter to receive early discounts offers, latest
-          news, sales and promo informations.
-        </p>
+          <h4 class="heading">Newsletter</h4>
+          <div id="newsletter_form">
+              <form action="<?php echo esc_url(admin_url('admin-post.php#newsletter_form')); ?>" method="post" class="newsletter" id="newsletter_form">
+                  <input type="hidden" name="action" value="newsletter_subscription">
+                  <div class="email">
+                      <ion-icon name="mail-outline"></ion-icon>
+                      <input type="email" name="newsletter_email" id="newsletter_email" placeholder="Your email address" required />
+                  </div>
+                  <button type="submit" class="btn">Subscribe</button>
+              </form>
+          </div>
+          <p class="para">
+              Subscribe to our Newsletter to receive early discounts offers, latest news, sales and promo information.
+          </p>
+          <?php if ($message = get_transient('newsletter_form_message')): ?>
+              <div class="newsletter-message <?php echo esc_attr(get_transient('newsletter_form_status')); ?>">
+                  <?php echo esc_html($message); ?>
+              </div>
+              <?php delete_transient('newsletter_form_message'); ?>
+              <?php delete_transient('newsletter_form_status'); ?>
+          <?php endif; ?>
       </div>
+
     </div>
 
     <hr />
@@ -99,6 +123,21 @@
     </p>
   </div>
 </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const starRating = document.querySelector('.woocommerce-product-rating .star-rating span');
+    const ratingValue = 4.5; // Example rating value
+
+    if (starRating) {
+        const percentage = (ratingValue / 5) * 100; // Calculate percentage
+        starRating.style.width = percentage + '%'; // Apply width dynamically
+    }
+});
+
+
+
+</script>
 
 <!-- Enqueue Scripts -->
 <?php

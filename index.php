@@ -12,7 +12,7 @@
 
 <body>
     <!-- blog -->
-    <section id="blogs">
+    <section id="archiveBlog">
         <!-- header -->
         <?php get_header() ?>
 
@@ -44,11 +44,7 @@
                 ?>
             </div>
 
-            <div class="blog-pagination">
-                <?php
-                    the_posts_pagination();
-                ?>
-            </div>
+            <?php the_posts_pagination(); ?>
         </div>
     </section>
 

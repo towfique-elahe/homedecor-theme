@@ -10,8 +10,19 @@
         add_theme_support('title-tag');
         add_theme_support('post-thumbnails');
         add_theme_support('woocommerce');
+        if ( defined( 'ELEMENTOR_VERSION' ) ) {
+            add_theme_support( 'elementor' );
+            add_theme_support('elementor-default-kit');
+        }       
     }
     add_action('after_setup_theme','homedecor_theme_support');
+
+    // Set default content width for Elementor
+    function yourtheme_elementor_content_width() {
+        return '1200';
+    }
+    add_filter('elementor/container/width', 'yourtheme_elementor_content_width');
+
 
     // styles
     function homedecor_register_styles() {
@@ -25,8 +36,16 @@
         wp_enqueue_style('homedecor-header', get_template_directory_uri() . "/assets/css/header.css", array(), $version, 'all');
         wp_enqueue_style('homedecor-footer', get_template_directory_uri() . "/assets/css/footer.css", array(), $version, 'all');
         wp_enqueue_style('homedecor-front-page', get_template_directory_uri() . "/assets/css/front-page.css", array(), $version, 'all');
+        wp_enqueue_style('homedecor-blogs', get_template_directory_uri() . "/assets/css/blogs.css", array(), $version, 'all');
         wp_enqueue_style('homedecor-woocommerce', get_template_directory_uri() . "/assets/css/woocommerce.css", array(), $version, 'all');
         wp_enqueue_style('homedecor-auth', get_template_directory_uri() . "/assets/css/auth.css", array(), $version, 'all');
+
+        // elementor styles
+        wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css');
+            if ( did_action( 'elementor/loaded' ) ) {
+                wp_enqueue_style( 'elementor-frontend' );
+                wp_enqueue_style( 'elementor-pro-frontend' );
+            }
     }
     add_action('wp_enqueue_scripts', 'homedecor_register_styles');
 
@@ -146,6 +165,8 @@
         register_setting('homedecor_settings_group', 'homedecor_testimonials', 'sanitize_testimonials');
         register_setting('homedecor_settings_group', 'homedecor_branding_images', 'sanitize_branding_images');
         register_setting('homedecor_settings_group', 'homedecor_slider_images', 'sanitize_slider_images');
+        register_setting('homedecor_settings_group', 'homedecor_watermark');
+		register_setting('homedecor_settings_group', 'homedecor_webp_conversion');
     }
     add_action('admin_init', 'homedecor_register_settings');
 
@@ -198,6 +219,26 @@
                 <?php settings_fields('homedecor_settings_group'); ?>
                 <?php do_settings_sections('homedecor_settings_group'); ?>
                 <table class="form-table">
+                    <!-- Watermarking -->
+                    <tr valign="top">
+                        <th scope="row">Enable Watermarking</th>
+                        <td>
+                            <?php $watermark_enabled = get_option('homedecor_watermark', ''); ?>
+                            <input type="checkbox" name="homedecor_watermark" value="1" <?php checked(1, $watermark_enabled, true); ?>>
+                            <label for="homedecor_watermark">Add watermark to uploaded images</label>
+                        </td>
+                    </tr>
+
+					<!-- WebP Conversion -->
+					<tr valign="top">
+						<th scope="row">Enable WebP Conversion</th>
+						<td>
+							<?php $webp_conversion = get_option('homedecor_webp_conversion', ''); ?>
+							<input type="checkbox" name="homedecor_webp_conversion" value="1" <?php checked(1, $webp_conversion, true); ?>>
+							<label for="homedecor_webp_conversion">Convert uploaded images to WebP format</label>
+						</td>
+					</tr>
+					
                     <!-- hero slider -->
                     <tr valign="top">
                         <th scope="row">Slider Images</th>
@@ -418,100 +459,104 @@
     }
 
 
-    // Handle AJAX request to load category products
-    function load_category_products() {
-        $category_id = intval($_POST['category_id']);
+// Handle AJAX request to load category products
+function load_category_products() {
+    $category_id = intval($_POST['category_id']);
 
-        $args = array(
-            'post_type' => 'product',
-            'posts_per_page' => 10,
-            'tax_query' => array(
-                array(
-                    'taxonomy' => 'product_cat',
-                    'field' => 'term_id',
-                    'terms' => $category_id,
-                ),
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => 10,
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' => $category_id,
             ),
-        );
+        ),
+    );
 
-        $query = new WP_Query($args);
+    $query = new WP_Query($args);
 
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $query->the_post();
-                global $product;
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            global $product;
 
-                // Product details
-                $product_id = $product->get_id();
-                $product_name = $product->get_name();
-                $product_link = get_permalink($product_id);
-                $product_image = $product->get_image('thumbnail');
-                $regular_price = $product->get_regular_price();
-                $sale_price = $product->get_sale_price();
-                $rating_count = $product->get_rating_count();
-                $average_rating = $product->get_average_rating();
-                $discount_percent = 0;
+            // Product details
+            $product_id = $product->get_id();
+            $product_name = $product->get_name();
+            $product_link = get_permalink($product_id);
+            $product_image = $product->get_image('thumbnail');
+            $rating_count = $product->get_rating_count();
+            $average_rating = $product->get_average_rating();
 
-                // Calculate discount percent if on sale
-                if ($sale_price && $regular_price && $regular_price > 0) {
-                    $discount_percent = (($regular_price - $sale_price) / $regular_price) * 100;
+            // Get prices
+            if ($product->is_type('variable')) {
+                $regular_price_min = $product->get_variation_regular_price('min', true);
+                $regular_price_max = $product->get_variation_regular_price('max', true);
+
+                if ($regular_price_min === $regular_price_max) {
+                    $regular_price_formatted = wc_price($regular_price_min);
+                } else {
+                    $regular_price_formatted = wc_price($regular_price_min) . ' - ' . wc_price($regular_price_max);
                 }
-
-                // Format prices using WooCommerce price functions
+                $sale_price_formatted = ''; // No sale price for variable products
+            } else {
                 $regular_price_formatted = wc_price($product->get_regular_price());
-                $sale_price_formatted = wc_price($product->get_sale_price());
+                $sale_price_formatted = $product->get_sale_price() ? wc_price($product->get_sale_price()) : '';
+            }
 
-                // Output HTML
-                ?>
-                <div class="carousel-item">
-                    <a href="<?php echo esc_url($product_link); ?>" class="product-link">
-                        <div class="product-info">
-                            <div class="image_container">
-                                <?php echo $product_image; ?>
-                            </div>
-                            <div class="product-details">
-                                <p class="product-category">
-                                    <?php
-                                    $product_categories = wp_get_post_terms($product->get_id(), 'product_cat');
-                                    if (!empty($product_categories) && !is_wp_error($product_categories)) {
-                                        foreach ($product_categories as $category) {
-                                            echo esc_html($category->name) . ' ';
-                                        }
+            // Output HTML
+            ?>
+            <div class="carousel-item">
+                <a href="<?php echo esc_url($product_link); ?>" class="product-link">
+                    <div class="product-info">
+                        <div class="image_container">
+                            <?php echo $product_image; ?>
+                        </div>
+                        <div class="product-details">
+                            <p class="product-category">
+                                <?php
+                                $product_categories = wp_get_post_terms($product->get_id(), 'product_cat');
+                                if (!empty($product_categories) && !is_wp_error($product_categories)) {
+                                    foreach ($product_categories as $category) {
+                                        echo esc_html($category->name) . ' ';
                                     }
-                                    ?>
-                                </p>
-                                <h4 class="product-name"><?php echo esc_html($product_name); ?></h4>
-                                <div class="product-meta">
-                                    <?php if ($average_rating > 0) : ?>
-                                        <div class="rating">
-                                            <?php echo wc_get_rating_html($average_rating, $rating_count); ?>
-                                        </div>
-                                    <?php endif; ?>
-                                    <div class="prices">
-                                        <?php if ($sale_price) : ?>
-                                            <span class="regular-price"><?php echo ($regular_price_formatted); ?></span>
-                                            <span class="sale-price"><?php echo ($sale_price_formatted); ?></span>
-                                            <span class="discount-percent"><?php echo sprintf('-%.0f%%', $discount_percent); ?></span>
-                                        <?php else : ?>
-                                            <span class="regular-price-solo"><?php echo ($regular_price_formatted); ?></span>
-                                        <?php endif; ?>
+                                }
+                                ?>
+                            </p>
+                            <h4 class="product-name"><?php echo esc_html($product_name); ?></h4>
+                            <div class="product-meta">
+                                <?php if ($average_rating > 0) : ?>
+                                    <div class="rating">
+                                        <?php echo wc_get_rating_html($average_rating, $rating_count); ?>
                                     </div>
+                                <?php endif; ?>
+                                <div class="prices">
+                                    <?php if ($sale_price_formatted) : ?>
+                                        <span class="regular-price"><?php echo ($regular_price_formatted); ?></span>
+                                        <span class="sale-price"><?php echo ($sale_price_formatted); ?></span>
+                                    <?php else : ?>
+                                        <span class="regular-price-solo"><?php echo ($regular_price_formatted); ?></span>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
-                    </a>
-                </div>
-                <?php
-            }
-        } else {
-            echo '<p>No products found in this category.</p>';
+                    </div>
+                </a>
+            </div>
+            <?php
         }
-
-        wp_reset_postdata();
-        wp_die();
+    } else {
+        echo '<p>No products found in this category.</p>';
     }
-    add_action('wp_ajax_load_category_products', 'load_category_products');
-    add_action('wp_ajax_nopriv_load_category_products', 'load_category_products');
+
+    wp_reset_postdata();
+    wp_die();
+}
+add_action('wp_ajax_load_category_products', 'load_category_products');
+add_action('wp_ajax_nopriv_load_category_products', 'load_category_products');
+
 
 
     // Register product filters sidebar in widgets
@@ -614,6 +659,227 @@
     }
     add_action('template_redirect', 'handle_user_login');
 
+
+    // newsletter custom table
+    function create_newsletter_table() {
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'newsletter_subscribers';
+        
+        $charset_collate = $wpdb->get_charset_collate();
+
+        $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+            id mediumint(9) NOT NULL AUTO_INCREMENT,
+            email varchar(100) NOT NULL,
+            subscribed_at datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
+            PRIMARY KEY (id),
+            UNIQUE KEY email (email)
+        ) $charset_collate;";
+
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($sql);
+    }
+    add_action('after_switch_theme', 'create_newsletter_table');
+
+    // newsletter form submission handler
+    function handle_newsletter_form_submission() {
+        if (isset($_POST['newsletter_email'])) {
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'newsletter_subscribers';
+            $email = sanitize_email($_POST['newsletter_email']);
+
+            if (is_email($email)) {
+                $exists = $wpdb->get_var($wpdb->prepare("SELECT id FROM $table_name WHERE email = %s", $email));
+
+                if ($exists) {
+                    $message = "You are already subscribed.";
+                    $status = 'error';
+                } else {
+                    $wpdb->insert($table_name, array('email' => $email));
+                    $message = "Thank you for subscribing!";
+                    $status = 'success';
+                }
+            } else {
+                $message = "Please enter a valid email address.";
+                $status = 'error';
+            }
+
+            set_transient('newsletter_form_message', $message, 30);
+            set_transient('newsletter_form_status', $status, 30);
+
+            wp_redirect($_SERVER['HTTP_REFERER']);
+            exit;
+        }
+    }
+    add_action('admin_post_nopriv_newsletter_subscription', 'handle_newsletter_form_submission');
+    add_action('admin_post_newsletter_subscription', 'handle_newsletter_form_submission');
+
+
+
+// Add Watermark to Uploaded Images
+function add_watermark_to_image($file) {
+    // Check if watermarking is enabled
+    $watermark_enabled = get_option('homedecor_watermark', false);
+    if (!$watermark_enabled) {
+        return $file;
+    }
+
+    // Check if the uploaded file is an image
+    $image_types = array('image/jpeg', 'image/png');
+    if (!in_array($file['type'], $image_types)) {
+        return $file;
+    }
+
+    // Load the image
+    $image_path = $file['file'];
+    $image_ext = pathinfo($image_path, PATHINFO_EXTENSION);
+
+    // Get the site logo URL
+    $custom_logo_id = get_theme_mod('custom_logo');
+    if (!$custom_logo_id) {
+        return $file; // No logo set, exit function
+    }
+    $logo_url = wp_get_attachment_image_src($custom_logo_id, 'full')[0];
+    if (!$logo_url) {
+        return $file; // Could not get logo URL, exit function
+    }
+
+    // Load the watermark image from the logo URL
+    $watermark = imagecreatefromstring(file_get_contents($logo_url));
+    if (!$watermark) {
+        return $file; // Failed to load watermark image
+    }
+
+    // Create image from file
+    switch ($image_ext) {
+        case 'jpeg':
+        case 'jpg':
+            $image = imagecreatefromjpeg($image_path);
+            break;
+        case 'png':
+            $image = imagecreatefrompng($image_path);
+            break;
+        default:
+            return $file;
+    }
+    if (!$image) {
+        return $file; // Failed to create image from file
+    }
+
+    // Get dimensions of the main image and watermark
+    $image_width = imagesx($image);
+    $image_height = imagesy($image);
+    $watermark_width = imagesx($watermark);
+    $watermark_height = imagesy($watermark);
+
+    // Resize the watermark to a width of 100px, maintaining aspect ratio
+    $new_watermark_width = 100;
+    $new_watermark_height = ($new_watermark_width / $watermark_width) * $watermark_height;
+    $resized_watermark = imagecreatetruecolor($new_watermark_width, $new_watermark_height);
+
+    // Handle transparency for PNG
+    if ($image_ext == 'png') {
+        imagealphablending($resized_watermark, false);
+        imagesavealpha($resized_watermark, true);
+        $transparent = imagecolorallocatealpha($resized_watermark, 0, 0, 0, 127);
+        imagefill($resized_watermark, 0, 0, $transparent);
+    }
+
+    imagecopyresampled($resized_watermark, $watermark, 0, 0, 0, 0, $new_watermark_width, $new_watermark_height, $watermark_width, $watermark_height);
+    imagedestroy($watermark); // Free the memory of the old watermark
+    $watermark = $resized_watermark;
+    $watermark_width = $new_watermark_width;
+    $watermark_height = $new_watermark_height;
+
+    // Calculate position for the watermark (bottom right corner)
+    $dest_x = $image_width - $watermark_width - 10; // 10px padding from the edge
+    $dest_y = $image_height - $watermark_height - 10; // 10px padding from the edge
+
+    // Merge the watermark with the main image
+    imagecopy($image, $watermark, $dest_x, $dest_y, 0, 0, $watermark_width, $watermark_height);
+
+    // Save the watermarked image
+    switch ($image_ext) {
+        case 'jpeg':
+        case 'jpg':
+            imagejpeg($image, $image_path);
+            break;
+        case 'png':
+            imagealphablending($image, false);
+            imagesavealpha($image, true);
+            imagepng($image, $image_path);
+            break;
+    }
+
+    // Free up memory
+    imagedestroy($image);
+    imagedestroy($watermark);
+
+    return $file;
+}
+add_filter('wp_handle_upload', 'add_watermark_to_image', 10, 1);
+
+
+
+
+
+
+
+	// Convert Uploaded Images to WebP
+	function convert_image_to_webp($file) {
+		// Check if WebP conversion is enabled
+		$webp_conversion_enabled = get_option('homedecor_webp_conversion', false);
+		if (!$webp_conversion_enabled) {
+			return $file;
+		}
+
+		// Check if the uploaded file is an image
+		$image_types = array('image/jpeg', 'image/png');
+		if (!in_array($file['type'], $image_types)) {
+			return $file;
+		}
+
+		// Load the image
+		$image_path = $file['file'];
+		$image_ext = pathinfo($image_path, PATHINFO_EXTENSION);
+		$image_name = pathinfo($image_path, PATHINFO_FILENAME);
+		$upload_dir = wp_upload_dir();
+		$webp_path = $upload_dir['path'] . '/' . $image_name . '.webp';
+
+		// Create image from file
+		switch ($image_ext) {
+			case 'jpeg':
+			case 'jpg':
+				$image = imagecreatefromjpeg($image_path);
+				break;
+			case 'png':
+				$image = imagecreatefrompng($image_path);
+				break;
+			default:
+				return $file;
+		}
+
+		// Convert to WebP
+		imagewebp($image, $webp_path);
+		imagedestroy($image);
+
+		// Add WebP file to Media Library
+		$wp_filetype = wp_check_filetype($webp_path);
+		$attachment = array(
+			'guid'           => $upload_dir['url'] . '/' . basename($webp_path),
+			'post_mime_type' => $wp_filetype['type'],
+			'post_title'     => sanitize_file_name($image_name),
+			'post_content'   => '',
+			'post_status'    => 'inherit'
+		);
+
+		$attach_id = wp_insert_attachment($attachment, $webp_path);
+		require_once(ABSPATH . 'wp-admin/includes/image.php');
+		$attach_data = wp_generate_attachment_metadata($attach_id, $webp_path);
+		wp_update_attachment_metadata($attach_id, $attach_data);
+
+		return $file;
+	}
+	add_filter('wp_handle_upload', 'convert_image_to_webp');
 
 
 ?>

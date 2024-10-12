@@ -20,8 +20,8 @@ function get_current_endpoint_title() {
     switch ($endpoint) {
         case 'orders':
             return __('Orders', 'woocommerce');
-        case 'downloads':
-            return __('Downloads', 'woocommerce');
+        case 'view-order':
+            return __('Order details', 'woocommerce');
         case 'edit-address':
             return __('Addresses', 'woocommerce');
         case 'payment-methods':
@@ -50,16 +50,50 @@ function get_current_endpoint_title() {
 
     <section id="auth">
         <div class="container my-account">
-            <h1 class="section_heading">
-                <?php 
-                    echo esc_html(get_current_endpoint_title());
-                ?>
-            </h1>
-            <?php
-                // Display WooCommerce My Account content
-                do_action('woocommerce_account_navigation');
-                do_action('woocommerce_account_content');
-            ?>
+            <div class="row">
+                <!-- svg image -->
+                <div class="col hero-image">
+                    <?php
+                        // Define paths
+                        $imgSrc = get_template_directory_uri() . '/assets/images/account.svg';
+                        $defaultImg = get_template_directory_uri() . '/assets/images/default-banner.jpg';
+
+                        // Check if the login.svg exists
+                        $imagePath = file_exists(get_template_directory() . '/assets/images/account.svg') ? $imgSrc : $defaultImg;
+                    ?>
+
+                    <!-- HTML with PHP echo to dynamically set src attribute -->
+                    <div class="image_container">
+                        <img src="<?php echo esc_attr($imagePath); ?>" alt="Account Image">
+                    </div>
+                </div>
+
+                <!-- main content -->
+                <div class="col">
+                    <h1 class="section_heading">
+                        <?php 
+                            echo esc_html(get_current_endpoint_title());
+                        ?>
+                    </h1>
+                    <?php
+                        // Display WooCommerce My Account content
+                        do_action('woocommerce_account_navigation');
+                        do_action('woocommerce_account_content');
+                    ?>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section_divider"></div>
+
+    <!-- call to action -->
+    <section class="auth-cta">
+        <img src="<?php echo get_template_directory_uri() . '/assets/images/background.jpeg'; ?>" alt="" class="cta-image">
+        <div class="content">
+            <h3 class="cta-heading">Welcome to Our Website</h3>
+            <p class="cta-para">Join us today to enjoy exclusive benefits and more.</p>
+            <a href="<?php echo home_url('/index.php/shop'); ?>" class="cta-button">Shop Now!</a>
         </div>
     </section>
 

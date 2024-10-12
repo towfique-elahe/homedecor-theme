@@ -1,3 +1,51 @@
+/* footer branding section */
+#footerBranding {
+  background-color: var(--clr2);
+}
+#footerBranding .col:last-child {
+  flex: 2;
+}
+#footerBranding .title {
+  font-size: 3rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--clr5);
+}
+#footerBranding .sub-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--clr3);
+  margin-top: -1rem;
+}
+#footerBranding .description {
+  font-size: 0.9rem;
+  color: var(--clr3);
+}
+#footerBranding .button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 !important;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--clr5);
+  transition: ease 0.3s;
+  background-color: transparent !important;
+}
+#footerBranding .button ion-icon {
+  font-size: 1rem;
+  color: var(--clr5);
+}
+#footerBranding .button:hover {
+  gap: 1rem;
+}
+@media only screen and (max-width: 1024px) {
+  #footerBranding .row {
+    flex-direction: column;
+  }
+}
+
+/* footer */
 #footer {
   background-color: var(--clr5);
 }
@@ -54,6 +102,9 @@
 #footer .newsletter .email {
   font-size: 1.2rem;
 }
+#footer .newsletter .btn {
+  font-size: 0.9rem;
+}
 #footer .newsletter .email input {
   width: 100%;
   height: 100%;
@@ -61,6 +112,16 @@
   outline: none;
   background-color: transparent;
   font-size: 0.9rem;
+}
+#footer .newsletter-message {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+#footer .newsletter-message.success {
+  color: #658147;
+}
+#footer .newsletter-message.error {
+  color: crimson;
 }
 #footer .para {
   font-size: 0.8rem;

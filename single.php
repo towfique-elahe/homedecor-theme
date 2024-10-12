@@ -12,14 +12,12 @@
 
 <body>
     <!-- blog -->
-    <section id="blog">
+    <section id="singleBlog">
         <!-- header -->
         <?php get_header() ?>
 
-        <div class="section-divider"></div>
-
         <!-- main content -->
-        <div class="container">
+        <div class="main container">
             <?php
                 if (have_posts()) {
                     while (have_posts()) {
