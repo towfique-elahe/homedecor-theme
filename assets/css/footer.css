@@ -252,6 +252,9 @@
   #footer .para {
     text-align: center;
   }
+  #footer .newsletter-desc {
+    text-align: left;
+  }
   #footer hr {
     margin-top: 1rem;
   }

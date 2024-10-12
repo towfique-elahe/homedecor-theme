@@ -1,3 +1,7 @@
+.carousel-item:hover img {
+  transform: scale(0.75) !important;
+}
+
 /* hero section */
 #hero .container {
   width: 100%;
@@ -33,6 +37,10 @@
   height: 100%;
   border: solid 1px var(--clr3);
   transition: 0.3s ease;
+}
+#hero .slider .image_container img,
+#hero .branding .image_container img {
+  transform: scale(1);
 }
 #hero .slider .image_container:hover,
 #hero .branding .image_container:hover,
@@ -194,8 +202,11 @@
 #popularCats .carousel-item:focus {
   box-shadow: var(--boxShadow1);
 }
+#popularCats .carousel-item img {
+  transform: scale(1);
+}
 #popularCats .carousel-item:hover img {
-  transform: scale(1.1);
+  transform: scale(1.05) !important;
 }
 #popularCats .cat_name {
   position: absolute;
@@ -346,6 +357,9 @@
 #transform .cta-button:hover {
   background-color: var(--clr3);
 }
+#transform .image_container img {
+  transform: scale(1);
+}
 @media only screen and (max-width: 1080px) {
   #transform {
     padding: 0;
@@ -354,18 +368,9 @@
     flex-direction: column;
     gap: 2rem;
   }
-  #transform .branding-content {
-    align-items: center;
-    text-align: center;
-  }
 }
 
 /* testimonial section */
-#customerTestimonials .container {
-  background-color: var(--clr3);
-  padding: 2rem;
-  border-radius: 5rem 0 5rem 2rem;
-}
 #customerTestimonials .carousel-item {
   margin-top: 3.5rem;
   overflow: visible;
@@ -390,6 +395,7 @@
   border-radius: 50%;
   border: solid 2px var(--clr2);
   background-color: var(--clr3);
+  transform: scale(1) !important;
 }
 #customerTestimonials .testimonial-content {
   padding-top: 2rem;
@@ -427,6 +433,9 @@
   width: 100%;
   height: 10rem;
   border-radius: 0.3rem;
+}
+#recentBlogs .image_container img {
+  transform: scale(1) !important;
 }
 #recentBlogs .post-details {
   margin-top: 1rem;

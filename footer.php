@@ -96,7 +96,7 @@
                   <button type="submit" class="btn">Subscribe</button>
               </form>
           </div>
-          <p class="para">
+          <p class="para newsletter-desc">
               Subscribe to our Newsletter to receive early discounts offers, latest news, sales and promo information.
           </p>
           <?php if ($message = get_transient('newsletter_form_message')): ?>

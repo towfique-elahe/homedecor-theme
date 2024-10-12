@@ -20,64 +20,64 @@
     <?php get_header()?>
 
     <!-- hero section -->
-    <?php get_template_part('template-parts/hero-section'); ?>
+    <?php get_template_part('template-parts/front-page/hero-section'); ?>
 
     <!-- feature section -->
-    <?php get_template_part('template-parts/feature-section'); ?>
+    <?php get_template_part('template-parts/front-page/feature-section'); ?>
 
     <div class="section_divider"></div>
 
     
     <!-- popular categories section -->
-    <?php get_template_part('template-parts/popular-cat-section'); ?>
+    <?php get_template_part('template-parts/front-page/popular-cat-section'); ?>
 
     <div class="section_divider"></div>
 
 
     <!-- call to action section -->
-    <?php get_template_part('template-parts/call-to-action'); ?>
+    <?php get_template_part('template-parts/front-page/call-to-action'); ?>
 
     <div class="section_divider"></div>
     
 
     <!-- featured products section -->
-    <?php get_template_part('template-parts/featured-products-section'); ?>
+    <?php get_template_part('template-parts/front-page/featured-products-section'); ?>
     
     <div class="section_divider"></div>
 
 
     <!-- best seller section -->
-    <?php get_template_part('template-parts/best-seller-section'); ?>
+    <?php get_template_part('template-parts/front-page/best-seller-section'); ?>
 
     <div class="section_divider"></div>
 
 
     <!-- new products section -->
-    <?php get_template_part('template-parts/new-products-section'); ?>
+    <?php get_template_part('template-parts/front-page/new-products-section'); ?>
 
     <div class="section_divider"></div>
 
 
     <!-- products with category tabs section -->
-    <?php get_template_part('template-parts/category-tab-section'); ?>
+    <?php get_template_part('template-parts/front-page/category-tab-section'); ?>
 
     <div class="section_divider"></div>
 
     
     <!-- transform home section -->
-    <?php get_template_part('template-parts/transform-home-section'); ?>
+    <?php get_template_part('template-parts/front-page/transform-home-section'); ?>
 
     <div class="section_divider"></div>
 
 
     <!-- customer testimonials section -->
-    <?php get_template_part('template-parts/testimonials-section'); ?>
+    <?php get_template_part('template-parts/front-page/testimonials-section'); ?>
 
     <div class="section_divider"></div>
 
 
     <!-- recent blogs section -->
-    <?php get_template_part('template-parts/blogs-section'); ?>
+    <?php get_template_part('template-parts/front-page/blogs-section'); ?>
 
     <div class="section_divider"></div>
 

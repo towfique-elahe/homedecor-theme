@@ -136,10 +136,11 @@ a {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover;
-  transition: 0.5s ease;
+  transform: scale(0.7);
+  transition: 0.3s ease;
 }
 .image_container:hover img {
-  transform: scale(1.05);
+  transform: scale(0.75);
 }
 
 /* carousel styles */
