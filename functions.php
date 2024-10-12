@@ -261,18 +261,31 @@ add_action('wp_ajax_nopriv_load_category_products', 'load_category_products');
 
 
 
-    // Register product filters sidebar in widgets
-    function register_product_filters_sidebar() {
+    // sidebar widgets
+    function homedecor_register_sidebars() {
+        // Register blog archive sidebar widget
+        register_sidebar(array(
+            'name'          => __('Blog Archive Sidebar', 'homedecor'),
+            'id'            => 'blog-archive-sidebar',
+            'description'   => __('Widgets in this area will be shown on the blog archive page.', 'homedecor'),
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
+        ));
+        // Register product filters sidebar widget
         register_sidebar(array(
             'name'          => __('Shop Sidebar', 'homedecor'),
             'id'            => 'product-filters-sidebar',
             'before_widget' => '<div id="%1$s" class="widget %2$s">',
             'after_widget'  => '</div>',
-            'before_title'  => '<h2 class="widget-title">',
-            'after_title'   => '</h2>',
+            'before_title'  => '<h3 class="widget-title">',
+            'after_title'   => '</h3>',
         ));
     }
-    add_action('widgets_init', 'register_product_filters_sidebar');
+    add_action('widgets_init', 'homedecor_register_sidebars');
+
+
 
     // custom loop for shop / category page
     function custom_loop_shop_per_page( $products_per_page ) {
@@ -582,6 +595,95 @@ add_filter('wp_handle_upload', 'add_watermark_to_image', 10, 1);
 		return $file;
 	}
 	add_filter('wp_handle_upload', 'convert_image_to_webp');
+
+
+    function homedecor_breadcrumbs() {
+        // Get the blog page URL
+        $blog_page_id = get_option('page_for_posts');
+        $blog_page_url = get_permalink($blog_page_id);
+
+        // Define the text for different breadcrumb elements
+        $blog_text = 'Blogs'; // Change text from 'Home' to 'Blog'
+        $delimiter = ' > '; // Delimiter between crumbs
+        $before = '<span class="current">'; // Tag before the current crumb
+        $after = '</span>'; // Tag after the current crumb
+
+        // Start the breadcrumb with the blog page link
+        echo '<div class="breadcrumbs">';
+        echo '<a href="' . esc_url($blog_page_url) . '">' . esc_html($blog_text) . '</a>' . $delimiter;
+
+        // Check if it is a category archive page
+        if (is_category()) {
+            $cat_obj = get_queried_object();
+            $this_category = get_category($cat_obj->term_id);
+            if ($this_category->parent != 0) {
+                $parent_category = get_category($this_category->parent);
+                echo get_category_parents($parent_category, true, $delimiter);
+            }
+            echo $before . single_cat_title('', false) . $after;
+        } 
+        // Check if it is a tag archive page
+        elseif (is_tag()) {
+            echo $before . single_tag_title('', false) . $after;
+        } 
+        // Check if it is a day archive page
+        elseif (is_day()) {
+            echo '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a>' . $delimiter;
+            echo '<a href="' . get_month_link(get_the_time('Y'), get_the_time('m')) . '">' . get_the_time('F') . '</a>' . $delimiter;
+            echo $before . get_the_time('d') . $after;
+        } 
+        // Check if it is a month archive page
+        elseif (is_month()) {
+            echo '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a>' . $delimiter;
+            echo $before . get_the_time('F') . $after;
+        } 
+        // Check if it is a year archive page
+        elseif (is_year()) {
+            echo $before . get_the_time('Y') . $after;
+        } 
+        // Check if it is an archive page
+        elseif (is_archive()) {
+            echo $before . 'Archive' . $after;
+        } 
+        // Check if it is a single post page
+        elseif (is_single()) {
+            $post_type = get_post_type_object(get_post_type());
+            if ($post_type) {
+                $post_type_name = $post_type->labels->singular_name;
+                echo '<a href="' . get_post_type_archive_link(get_post_type()) . '">' . $post_type_name . '</a>' . $delimiter;
+            }
+            echo $before . get_the_title() . $after;
+        } 
+        // Check if it is a page
+        elseif (is_page()) {
+            global $post;
+            if ($post->post_parent) {
+                $parent_id = $post->post_parent;
+                $breadcrumbs = array();
+                while ($parent_id) {
+                    $page = get_page($parent_id);
+                    $breadcrumbs[] = '<a href="' . get_permalink($page->ID) . '">' . get_the_title($page->ID) . '</a>';
+                    $parent_id = $page->post_parent;
+                }
+                $breadcrumbs = array_reverse($breadcrumbs);
+                foreach ($breadcrumbs as $crumb) {
+                    echo $crumb . $delimiter;
+                }
+            }
+            echo $before . get_the_title() . $after;
+        } 
+        // Check if it is a search results page
+        elseif (is_search()) {
+            echo $before . 'Search results for "' . get_search_query() . '"' . $after;
+        } 
+        // Check if it is a 404 error page
+        elseif (is_404()) {
+            echo $before . 'Error 404' . $after;
+        }
+
+        echo '</div>';
+    }
+
 
 
 ?>

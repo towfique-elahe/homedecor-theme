@@ -281,7 +281,7 @@
   max-width: 20rem;
   height: 100%;
   background-color: var(--clr4);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--boxShadow1);
   padding: 1rem;
   z-index: 1000;
   transition: ease 0.2s;

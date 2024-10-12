@@ -12,9 +12,11 @@
         </div>
 
         <div class="col blog-content">
-            <h3 class="blog-title">
-                <?php the_title() ?>
-            </h3>
+            <a href="<?php the_permalink() ?>">
+                <h3 class="blog-title">
+                    <?php the_title() ?>
+                </h3>
+            </a>
             <p class="blog-date">
                 <?php
                     $post_date = get_the_date('d M, Y');

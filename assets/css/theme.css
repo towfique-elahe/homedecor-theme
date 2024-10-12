@@ -69,7 +69,7 @@ a {
   width: 100%;
   z-index: 1000;
   background-color: #fff;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--boxShadow1);
 }
 
 .section_heading,
@@ -97,30 +97,31 @@ a {
 }
 
 .btn {
-  color: var(--clr5);
+  color: var(--clr3);
   background: var(--clr2);
   border-radius: 0.3rem;
   font-size: 1rem;
-  text-transform: uppercase;
   font-weight: 500;
-  letter-spacing: 0.1rem;
+  letter-spacing: 1px;
   padding: 0.5rem 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  transition: ease 0.3s;
+  transition: ease 0.2s;
   cursor: pointer;
   border: none;
 }
 .btn ion-icon {
-  color: var(--clr5);
+  color: var(--clr3);
   font-size: 1.5rem;
 }
 .btn:hover,
 .btn:active,
 .btn:focus {
-  background-color: var(--clr1);
+  background-color: var(--clr3);
+  color: var(--clr2);
+  box-shadow: var(--boxShadow1);
 }
 
 .image_container {
@@ -150,20 +151,23 @@ a {
   display: flex !important;
   gap: 1rem;
 }
+.slick-list {
+  padding: 1.5rem 0 !important;
+}
 .carousel-item {
   padding: 1rem;
   background: var(--clr5);
-  border: 1px solid transparent;
+  border: 1px solid var(--clr3);
   border-radius: 0.5rem;
   transition: 0.3s ease;
-  overflow: hidden;
 }
 .carousel-item .image_container {
   max-height: 15rem;
 }
 .carousel-item:hover,
-.carousel-item:active {
-  border-color: var(--clr2);
+.carousel-item:active,
+.carousel-item:focus {
+  box-shadow: var(--boxShadow1);
 }
 .slick-prev:before,
 .slick-next:before {
@@ -207,10 +211,11 @@ section .link {
   align-items: center;
   gap: 5px;
   font-size: 0.9rem;
-  transition: 0.3s ease;
+  font-weight: 500;
+  transition: 0.2s ease;
 }
 section ion-icon {
-  transition: 0.3s ease;
+  transition: 0.2s ease;
 }
 section .link:hover {
   color: var(--clr2);
@@ -279,4 +284,20 @@ section .discount-percent {
   padding: 0.1rem 1rem 0.1rem 0.3rem;
   border-radius: 0.2rem 0 0 0.2rem;
   font-size: 0.8rem;
+}
+
+.breadcrumbs {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+.breadcrumbs a:hover,
+.breadcrumbs a:active,
+.breadcrumbs a:focus {
+  color: var(--clr2);
+}
+.breadcrumbs .current {
+  color: var(--clr2);
 }

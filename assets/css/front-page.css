@@ -14,6 +14,7 @@
 #hero .slider .slick-list {
   width: 100%;
   height: 100%;
+  padding: 0 !important;
 }
 #hero .slider .slick-track {
   width: 100%;
@@ -31,6 +32,15 @@
   width: 100%;
   height: 100%;
   border: solid 1px var(--clr3);
+  transition: 0.3s ease;
+}
+#hero .slider .image_container:hover,
+#hero .branding .image_container:hover,
+#hero .slider .image_container:active,
+#hero .branding .image_container:active,
+#hero .slider .image_container:focus,
+#hero .branding .image_container:focus {
+  box-shadow: var(--boxShadow1);
 }
 #hero .slick-arrow {
   position: absolute;
@@ -84,6 +94,12 @@
   align-items: center;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
+  transition: 0.3s ease;
+}
+#feature .card:hover,
+#feature .card:active,
+#feature .card:focus {
+  box-shadow: var(--boxShadow1);
 }
 #feature .card ion-icon {
   font-size: 2rem;
@@ -161,26 +177,7 @@
 }
 
 /* pupular categories section */
-#popularCats .head {
-  justify-content: space-between;
-  align-items: center;
-}
-#popularCats .link {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.9rem;
-  transition: 0.3s ease;
-}
-#popularCats ion-icon {
-  transition: 0.3s ease;
-}
-#popularCats .link:hover {
-  color: var(--clr2);
-}
-#popularCats .link:hover ion-icon {
-  color: var(--clr2);
-}
+
 #popularCats img {
   height: 12rem !important;
 }
@@ -190,6 +187,12 @@
 #popularCats .carousel-item {
   position: relative;
   padding: 0;
+  border: solid 1px var(--clr3);
+}
+#popularCats .carousel-item:hover,
+#popularCats .carousel-item:active,
+#popularCats .carousel-item:focus {
+  box-shadow: var(--boxShadow1);
 }
 #popularCats .carousel-item:hover img {
   transform: scale(1.1);
@@ -197,12 +200,20 @@
 #popularCats .cat_name {
   position: absolute;
   bottom: 0.5rem;
-  left: 1rem;
+  left: 0.5rem;
   font-size: 0.9rem;
   font-weight: 500;
   background-color: var(--clr5);
   padding: 0rem 0.4rem;
-  border-radius: 0.3rem;
+  border-radius: 0.2rem;
+  border: solid 1px var(--clr3);
+  box-shadow: var(--boxShadow1);
+  transition: 0.3s ease;
+}
+#popularCats .carousel-item:hover .cat_name {
+  background-color: var(--clr2);
+  color: var(--clr5);
+  border-color: var(--clr2);
 }
 
 /* cta */
@@ -223,7 +234,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: blur(3px) brightness(0.7);
+  filter: blur(3px) brightness(0.5);
 }
 #cta .content {
   width: 100%;
@@ -239,24 +250,26 @@
   border-radius: 0.5rem;
 }
 #cta .cta-heading {
-  color: var(--clr5);
+  color: var(--clr3);
 }
 #cta .cta-para {
-  color: var(--clr5);
+  color: var(--clr3);
   font-size: 1.1rem;
   font-weight: 500;
 }
 #cta .cta-button {
-  background-color: var(--clr5);
+  background-color: var(--clr3);
+  color: var(--clr2);
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 0.3rem;
   font-size: 1rem;
   font-weight: 500;
-  transition: ease 0.3s;
+  transition: ease 0.2s;
 }
 #cta .cta-button:hover {
-  background-color: var(--clr4);
+  background-color: var(--clr2);
+  color: var(--clr3);
 }
 @media only screen and (max-width: 768px) {
   #cta .cta-heading {
@@ -285,11 +298,12 @@
 #categoryTabs .category-tab {
   border: none;
   outline: none;
-  background-color: transparent;
+  background-color: var(--clr3);
+  color: var(--clr2);
   font-size: 0.9rem;
   font-weight: 500;
   padding: 0.2rem 0.5rem;
-  transition: 0.3s ease;
+  transition: 0.2s ease;
   border-radius: 0.3rem;
   cursor: pointer;
 }
@@ -297,16 +311,17 @@
 #categoryTabs .category-tab:active,
 #categoryTabs .category-tab:focus {
   background-color: var(--clr2);
-  color: var(--clr5);
+  color: var(--clr3);
 }
 #categoryTabs .category-tab.active {
   background-color: var(--clr2);
-  color: var(--clr5);
+  color: var(--clr3);
 }
 
 /* tranform home section */
 #transform {
   background-color: var(--clr2);
+  box-shadow: var(--boxShadow1);
   padding: 3rem 0;
 }
 #transform .branding-content {
@@ -349,12 +364,17 @@
 #customerTestimonials .container {
   background-color: var(--clr3);
   padding: 2rem;
-  border-radius: 0.5rem;
+  border-radius: 5rem 0 5rem 2rem;
 }
 #customerTestimonials .carousel-item {
   margin-top: 3.5rem;
   overflow: visible;
-  border-radius: 1rem;
+  border-radius: 2.5rem 0 2.5rem 1rem;
+}
+#customerTestimonials .carousel-item:hover,
+#customerTestimonials .carousel-item:active,
+#customerTestimonials .carousel-item:focus {
+  border-color: var(--clr3);
 }
 #customerTestimonials .image_container {
   position: absolute;

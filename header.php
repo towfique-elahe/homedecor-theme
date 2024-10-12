@@ -3,7 +3,7 @@
     <div class="topbar">
         <div class="container">
             <p class="greeting">
-                Welcome to Home Decor Retail
+                Welcome to <?php bloginfo('name'); ?>
             </p>
         </div>
     </div>

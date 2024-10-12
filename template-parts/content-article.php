@@ -5,6 +5,7 @@
     </h1>
 
     <p class="blog-date">Published on <?php echo get_the_date('d M, Y'); ?></p>
+    <?php homedecor_breadcrumbs(); ?>
 
     <?php
         $thumbnail_url = get_the_post_thumbnail_url();
