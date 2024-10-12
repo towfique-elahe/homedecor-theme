@@ -58,6 +58,7 @@
   color: var(--clr5);
 }
 #promoPopup .promo-title {
+  font-family: Raleway;
   font-size: 2rem;
   font-weight: 600;
   color: var(--clr2);
@@ -84,7 +85,6 @@
   background-color: var(--clr2);
   color: var(--clr5);
 }
-
 /* Fade-in Animation */
 @keyframes fadeIn {
   from {
@@ -98,24 +98,26 @@
 /* footer branding section */
 #footerBranding {
   background-color: var(--clr2);
+  padding: 1rem 0;
 }
 #footerBranding .col:last-child {
   flex: 2;
 }
 #footerBranding .title {
   font-size: 3rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: capitalize;
   color: var(--clr5);
 }
 #footerBranding .sub-title {
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.3rem;
+  font-weight: 600;
   color: var(--clr3);
   margin-top: -1rem;
 }
 #footerBranding .description {
   font-size: 0.9rem;
+  font-weight: 500;
   color: var(--clr3);
 }
 #footerBranding .button {
@@ -123,8 +125,8 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0 !important;
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 0.9rem;
+  font-weight: 600;
   color: var(--clr5);
   transition: ease 0.3s;
   background-color: transparent !important;

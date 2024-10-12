@@ -142,10 +142,10 @@
   float: right;
   overflow: hidden;
   position: relative;
-  height: 1em;
+  height: 1.2rem;
   line-height: 1;
-  font-size: 1em;
-  width: 67px;
+  font-size: 1.2rem;
+  width: 5rem;
   margin-top: 3px;
 }
 .woocommerce .star-rating::before,

@@ -3,8 +3,14 @@
     <div class="topbar">
         <div class="container">
             <p class="greeting">
-                Welcome to <?php bloginfo('name'); ?>
+                Welcome to <?php bloginfo('name'); ?> | <span>Elevate Your Home's Aesthetic with Us</span>
             </p>
+            <nav class="nav">
+                <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_shop_page_id'))); ?>">Shop</a>
+                <a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>">Blog</a>
+                <a href="<?php echo esc_url(home_url('/about/')); ?>">About</a>
+                <a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a>
+            </nav>
         </div>
     </div>
 
@@ -30,18 +36,6 @@
                     </div>
 
                     <div class="col search_grp">
-                            <!-- <div class="cat_menu">
-                                <button id="categoryButton">all <ion-icon name="chevron-down-outline"></ion-icon></button>
-                                <ul class="dropdown_content" id="categoryList" style="display: none;">
-                                    <?php
-                                    $product_categories = get_woocommerce_product_categories();
-                                    foreach ($product_categories as $category) {
-                                        echo '<li><a href="' . get_term_link($category) . '">' . $category->name . '</a></li>';
-                                    }
-                                    ?>
-                                </ul>
-                            </div>
-                            <hr> -->
                             <form role="search" method="get" class="search" action="<?php echo esc_url(home_url('/')); ?>">
                                 <input type="search" class="search_box" placeholder="Search products" value="<?php echo get_search_query(); ?>" name="s" />
                                 <input type="hidden" name="post_type" value="product" />
@@ -81,9 +75,9 @@ $categories = get_terms( array(
 ?>
 <div class="navbar">
     <div class="container">
-        <!-- This anchor will be fixed and the link will be the WordPress home URL -->
-        <a href="<?php echo home_url(); ?>" class="home-btn">Home</a>
         <nav class="nav">
+            <a href="<?php echo home_url(); ?>" class="home-btn">Home</a>
+            <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_shop_page_id'))); ?>" class="menu-link">Shop</a>
             <?php foreach ( $categories as $category ) : ?>
                 <?php if ( !$category->parent ) : // Only display top-level categories ?>
                     <?php

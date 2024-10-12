@@ -1,4 +1,20 @@
 /* ........................Blog Archive Page..................... */
+.breadcrumbs {
+  display: flex;
+  gap: 0.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+.breadcrumbs a:hover,
+.breadcrumbs a:active,
+.breadcrumbs a:focus {
+  color: var(--clr2);
+}
+.breadcrumbs .current {
+  color: var(--clr2);
+}
+
 #archiveBlog {
   padding-bottom: 2rem;
 }

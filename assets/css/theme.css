@@ -1,12 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  text-decoration: none;
-  font-family: Poppins;
-  color: var(--clr1);
+  font-family: Nunito;
 }
 
 *::selection {
@@ -35,8 +33,15 @@ html {
   --boxShadow1: 0 5px 30px 0 rgba(0, 0, 0, 0.055);
 }
 
+body {
+  font-family: Nunito;
+  color: var(--clr1);
+}
+
 a {
   display: inline-block;
+  text-decoration: none;
+  color: var(--clr1);
 }
 
 .full-container {
@@ -74,14 +79,15 @@ a {
 
 .section_heading,
 .page-title {
-  font-size: 2rem;
-  font-weight: 600;
+  font-family: Raleway;
+  font-size: 3rem;
+  font-weight: 500;
   text-transform: capitalize;
   color: var(--clr2);
 }
 @media only screen and (max-width: 767px) {
   .section_heading {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 }
 
@@ -101,7 +107,8 @@ a {
   background: var(--clr2);
   border-radius: 0.3rem;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 700;
+  text-transform: uppercase;
   letter-spacing: 1px;
   padding: 0.5rem 2rem;
   display: flex;
@@ -194,111 +201,4 @@ a {
 }
 .slick-active button::before {
   color: var(--clr2) !important;
-}
-
-/* product carousel sections */
-section .head {
-  justify-content: space-between;
-  align-items: center;
-}
-@media only screen and (max-width: 550px) {
-  section .head {
-    flex-direction: column;
-    justify-content: center;
-  }
-}
-section .link {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: 0.2s ease;
-}
-section ion-icon {
-  transition: 0.2s ease;
-}
-section .link:hover {
-  color: var(--clr2);
-}
-section .link:hover ion-icon {
-  color: var(--clr2);
-}
-section img:hover {
-  transform: none;
-}
-section .carousel-item {
-  position: relative;
-}
-section .carousel-item:hover img {
-  transform: scale(1.1);
-}
-section .product-link {
-  display: block;
-  width: 100%;
-}
-section .product-details {
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-section .product-category {
-  font-size: 0.8rem;
-  font-weight: 300;
-}
-section .product-name {
-  font-size: 0.9rem;
-  font-weight: 500;
-  height: 2.7rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-section .prices {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-section .regular-price {
-  font-size: 0.9rem;
-  font-weight: 300;
-  opacity: 0.8;
-  text-decoration: line-through;
-}
-section .sale-price .woocommerce-Price-currencySymbol,
-section .regular-price-solo .woocommerce-Price-currencySymbol,
-section .sale-price bdi,
-section .regular-price-solo bdi {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--clr2) !important;
-}
-section .discount-percent {
-  position: absolute;
-  top: 1rem;
-  right: 0;
-  background-color: var(--clr2);
-  color: var(--clr5);
-  padding: 0.1rem 1rem 0.1rem 0.3rem;
-  border-radius: 0.2rem 0 0 0.2rem;
-  font-size: 0.8rem;
-}
-
-.breadcrumbs {
-  display: flex;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: 0.2s ease;
-}
-.breadcrumbs a:hover,
-.breadcrumbs a:active,
-.breadcrumbs a:focus {
-  color: var(--clr2);
-}
-.breadcrumbs .current {
-  color: var(--clr2);
 }
